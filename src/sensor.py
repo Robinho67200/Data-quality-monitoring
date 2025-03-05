@@ -1,5 +1,7 @@
 import random
 from datetime import datetime, timedelta
+
+import numpy as np
 import pandas as pd
 from pandas import DataFrame
 
@@ -27,8 +29,10 @@ class Visitors:
                 data["day"].append(new_day.strftime("%Y-%m-%d"))
                 data["hour"].append(i_hour)
 
-                if random.random() <= 0.02:  # 2% failure
-                    data["number_visitors"].append(None)
+                if int(new_day.strftime("%w")) == 0:  # Store close the Sunday
+                    data["number_visitors"].append(np.nan)
+                elif random.random() <= 0.02:  # 2% failure
+                    data["number_visitors"].append(np.nan)
                 elif random.random() >= 0.95:  # 5% of improbable data
                     data["number_visitors"].append(random.randint(20, 100) * 0.6)
                 else:
@@ -44,8 +48,8 @@ class Visitors:
         :param hour: (int) the hour when we want to recover the number of visitors
         :return: Dataframe
         """
-        return self.generate_data().query(f"day == '{day}' and hour == {hour}")['number_visitors'].values[0]
-
-visitors = Visitors()
-visitors.generate_data()
-print(visitors.get_number_visitors("2022-05-01", 10))
+        return (
+            self.generate_data()
+            .query(f"day == '{day}' and hour == {hour}")["number_visitors"]
+            .values[0]
+        )
