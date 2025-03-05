@@ -36,7 +36,7 @@ class Visitors:
 
         return pd.DataFrame(data)
 
-    def get_number_visitors(self, day: str, hour: int) -> DataFrame:
+    def get_number_visitors(self, day: str, hour: int) -> int:
         """
         Return the number of visitors for an exact day and hour.
 
@@ -44,4 +44,8 @@ class Visitors:
         :param hour: (int) the hour when we want to recover the number of visitors
         :return: Dataframe
         """
-        return self.generate_data().query(f"day == '{day}' and hour == {hour}")
+        return self.generate_data().query(f"day == '{day}' and hour == {hour}")['number_visitors'].values[0]
+
+visitors = Visitors()
+visitors.generate_data()
+print(visitors.get_number_visitors("2022-05-01", 10))
