@@ -3,11 +3,11 @@ from datetime import datetime, timedelta
 import pandas as pd
 from pandas import DataFrame
 
-
 class Visitors:
     """
     Class representing a number of visitors.
     """
+
     def generate_data(self) -> DataFrame:
         """
         Generate a fictive Dataframe with the number of visitors per day and per hour for
@@ -26,7 +26,13 @@ class Visitors:
             for i_hour in range(8, 20):
                 data["day"].append(new_day.strftime("%Y-%m-%d"))
                 data["hour"].append(i_hour)
-                data["number_visitors"].append(random.randint(20, 100))
+
+                if random.random() <= 0.02:  # 2% failure
+                    data["number_visitors"].append(None)
+                elif random.random() >= 0.95:  # 5% of improbable data
+                    data["number_visitors"].append(random.randint(20, 100) * 0.6)
+                else:
+                    data["number_visitors"].append(random.randint(20, 100))
 
         return pd.DataFrame(data)
 
@@ -39,6 +45,3 @@ class Visitors:
         :return: Dataframe
         """
         return self.generate_data().query(f"day == '{day}' and hour == {hour}")
-
-visitors = Visitors()
-print(visitors.get_number_visitors("2025-03-04", 17))
