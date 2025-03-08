@@ -112,7 +112,6 @@ class Visitors:
         :param day: (str) the day when we want to recover the number of visitors
         :return: dict
         """
-        data = self.generate_data().query(f"day == '{day}'").to_dict("split")
-        del data["index"]
+        data = self.generate_data().query(f"day == '{day}'").to_dict('list')
 
         return data
