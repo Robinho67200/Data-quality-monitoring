@@ -38,13 +38,9 @@ def add_data(
     else:
         data["id_sensor"].append(sensor)
 
-    if int(day_of_week) == 6 and (
-        hour == 12 or hour >= 18
-    ):  # More customers on Saturday
+    if int(day_of_week) == 6 :  # More customers on Saturday
         nb_visitors = random.randint(20, 100) * saturday_coefficient
-    elif (
-        hour == 12 or hour >= 18
-    ):  # More customers at lunchtime and evening for the rest of the week
+    elif hour == 12 or hour >= 18 :  # More customers at lunchtime and evening for the rest of the week
         nb_visitors = (
             random.randint(20, 100)
             * saturday_coefficient
