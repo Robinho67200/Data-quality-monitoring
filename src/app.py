@@ -17,8 +17,10 @@ def visit(date: str, store: str) -> JSONResponse:
     try:
         nb_visit = 0
         for i_day in range(8, 20):
-            nb_visitors_hours = visitors.get_number_visitors(date, hour=i_day, store=store)
-            if nb_visitors_hours != 'null':
+            nb_visitors_hours = visitors.get_number_visitors(
+                date, hour=i_day, store=store
+            )
+            if nb_visitors_hours != "null":
                 nb_visit += int(nb_visitors_hours)
 
         return JSONResponse(status_code=200, content=nb_visit)
@@ -43,5 +45,3 @@ def visit(date: str) -> JSONResponse:
         return JSONResponse(
             status_code=400, content=f"La valeur {date} n'est pas valide !"
         )
-
-
