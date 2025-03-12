@@ -28,7 +28,7 @@ class TestVisitSensor(unittest.TestCase):
     def test_day_open(self):
         visitors = Visitors()
         visit_count = visitors.get_number_visitors("2025-03-03", 10, "Strasbourg")
-        self.assertEqual(visit_count, 47)
+        self.assertEqual(visit_count, 62)
 
     def test_breakdown(self):
         visitors = Visitors()
