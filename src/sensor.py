@@ -95,9 +95,10 @@ class Visitors:
         }
         stores = ["Strasbourg", "Metz", "Colmar", "Haguenau"]
         sensors = ["A", "B"]
+        start_random_seed = {"Strasbourg":1, "Metz": 20000, "Colmar":40000, "Haguenau":60000}
         for store in stores:
             for i_day in range(nb_days):
-                random.seed(i_day)
+                random.seed(i_day + start_random_seed[store])
                 new_day = first_day + timedelta(days=i_day)
                 for i_hour in range(8, 20):
                     for sensor in sensors:
