@@ -1,7 +1,6 @@
-import numpy as np
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from sensor import Visitors
+from src.sensor import Visitors
 
 app = FastAPI()
 
